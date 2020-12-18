@@ -18,6 +18,21 @@ app.use(session({
 
 app.use(express.urlencoded({extended: true}));
 
+app.get("/", function (req, res) {
+//res.render("index");
+    //res.send("Login form will go here");
+      let sql =  "SELECT * FROM questions";
+      pool.query(sql, function (err, result, fields) {
+        if (err) throw err;
+         else {
+              console.log("result");
+              res.render("index", { result: result });
+            }
+      });
+
+ });
+ 
+
  //welome page
 app.get("/", function (req, res) {
     res.render("results");
